@@ -1,4 +1,8 @@
 *.py[co]
+*.db
+*.ipynb
+raw_abs/
+.ipynb_checkpoints/
 
 # Packages
 *.egg

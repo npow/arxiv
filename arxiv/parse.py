@@ -45,7 +45,7 @@ def map_to_arxiv_refs(arxiv_ids, refs):
         index += 1
     return arxiv_refs
 
-def parse_abs_file(f, absfolder, save_to):
+def parse_abs(absfolder):
     from arxiv.abstract import RawAbstract, Abstract, session, create_tables
     create_tables()
     for filename in os.listdir(absfolder):
@@ -55,8 +55,8 @@ def parse_abs_file(f, absfolder, save_to):
             abs = Abstract()
             rawabs.from_atom_entry(entry)
             abs.from_atom_entry(entry)
-            session.add(abs)
-            session.add(rawabs)
+            session.merge(abs)
+            session.merge(rawabs)
         session.commit()
         print 'finished ', filename
 

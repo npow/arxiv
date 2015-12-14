@@ -43,7 +43,7 @@ class RawAbstract(Base):
         self.updated_raw = entry['updated']
         self.updated_at = datetime.fromtimestamp(mktime(entry['updated_parsed']))
         self.title = entry['title']
-        self.title = entry['summary']
+        self.summary = entry['summary']
         names = [a['name'] for a in entry['authors']]
         self.author_names = '|'.join(names)
         self.prim_category = entry['arxiv_primary_category']['term']
@@ -109,7 +109,7 @@ def test(filename):
     abs = RawAbstract()
     abs.from_atom_entry(ff.entries[0])
     create_tables()
-    session.add(abs)
+    session.merge(abs)
     session.commit()
     return abs
 
